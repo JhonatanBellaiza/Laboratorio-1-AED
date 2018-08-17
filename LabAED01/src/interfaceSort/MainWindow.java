@@ -1,5 +1,38 @@
 package interfaceSort;
 
-public class MainWindow {
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class MainWindow extends JFrame {
+	private PanelRandomArray panelRandomArray;
+	private PanelManualArray panelManualArray;
+	
+	public MainWindow () {
+		this.setSize(500, 500);
+		this.setLayout(new BorderLayout());
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("AED Lab 01 ");
+		panelRandomArray = new PanelRandomArray(this);
+		panelManualArray = new PanelManualArray(this);
+		this.add(BorderLayout.WEST,panelRandomArray);
+		this.add(BorderLayout.EAST,panelManualArray);
+		
+		
+		
+	}
+	
+	
+	public static void main(String[]a) {
+		MainWindow main= new MainWindow();
+		main.setVisible(true);
+		
+		
+	}
+	
+	
+	
 
 }
