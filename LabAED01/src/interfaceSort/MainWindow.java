@@ -1,6 +1,7 @@
 package interfaceSort;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +11,7 @@ public class MainWindow extends JFrame {
 	private PanelManualArray panelManualArray;
 	
 	public MainWindow () {
-		this.setSize(500, 500);
+		this.setSize(250, 250);
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
