@@ -9,6 +9,9 @@ public class Procesator {
 	}
 	
 	
-	
+	public void calculateTime() {
+		
+	}
 
 }
+//pri=ueba
