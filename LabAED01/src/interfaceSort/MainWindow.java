@@ -32,6 +32,26 @@ public class MainWindow extends JFrame {
 		
 		
 	}
+
+
+	public PanelRandomArray getPanelRandomArray() {
+		return panelRandomArray;
+	}
+
+
+	public void setPanelRandomArray(PanelRandomArray panelRandomArray) {
+		this.panelRandomArray = panelRandomArray;
+	}
+
+
+	public PanelManualArray getPanelManualArray() {
+		return panelManualArray;
+	}
+
+
+	public void setPanelManualArray(PanelManualArray panelManualArray) {
+		this.panelManualArray = panelManualArray;
+	}
 	
 	
 	
