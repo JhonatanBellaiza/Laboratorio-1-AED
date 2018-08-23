@@ -3,72 +3,63 @@ import java.util.Random;
 
 public class RadixSort {
 
-    // Main function to test performance sorting 1 million integers.
-    // Results in about 220 ms on a 2.3 Ghz Core i5 processor w/4GB 1333 Mhz RAM
     public static void main(String[] args){
-        final int SIZE = 100000000;
+        final int SIZE = 10;
 
         Random r = new Random();
         int[] test = new int[SIZE];
 
         for (int i = 0; i < SIZE; i++){
-            test[i] = r.nextInt(Integer.MAX_VALUE);
+            test[i] = r.nextInt(100);
         }
 
         long start = System.currentTimeMillis();
-        test = sort(test);
+        test = Radixsort(test);
         long end = System.currentTimeMillis();
 
-//        for (Integer i : test){
-//            System.out.println(i);
-//        }
+        for ( int i=0; i<test.length ; i++) {
+        	System.out.println(" "+test[i]);
+        }
         System.out.println("Mayor: "+ test[test.length-1]);
         System.out.println("MilliTimes: "+(end-start));
     }
 
-    // Sort the numbers beginning with least-significant digit
-    public static int[] sort(int[] input){
+    public static int[] Radixsort(int[] A) {
     	
-//    	int max = 4580;
-//    	int place = Integer.toString(max).length();
-//    	int orden = (int) Math.pow(10, (place-1));
-//    	System.out.println("Tamaño: "+ place+ " Del orden del: "+orden);
-//         Largest place for a 32-bit int is the 1 billion's place
-        for(int place=1; place <= 1000000000; place *= 10){
-//             Use counting sort at each digit's place
-            input = countingSort(input, place);
-        }
+    	int n = A.length;
+    	int max = A[0];
+    	for (int i = 1; i < n; i++) {
+    	     if( A[ i ] > max )
+    	        max = A[i];
+    	}
+    	int cantdigi= Integer.toString(max).length();
+    	int miles = (int) Math.pow(10, (cantdigi-1));
+//    	(pl aumenta, tal que, pl*10 cada ciclo)
+    	for (int pl = 1; pl <= miles; pl *= 10) { 
+    		
+    		int[] out = new int[A.length];
 
-        return input;
+            int[] count = new int[10];
+
+            for(int i=0; i < A.length; i++){
+                int digit = ((A[i]/pl ) % 10);
+                count[digit] += 1;
+            }
+
+            for(int i=1; i < count.length; i++){
+                count[i] += count[i-1];
+            }
+
+            for(int i = A.length-1; i >= 0; i--){
+                int digit = ((A[i]/pl ) % 10);
+
+                out[count[digit]-1] = A[i];
+                count[digit]--;
+            }
+            A = out;
+    	}
+        return A;
+
+    	
     }
-
-    private static int[] countingSort(int[] input, int place){
-        int[] out = new int[input.length];
-
-        int[] count = new int[10];
-
-        for(int i=0; i < input.length; i++){
-            int digit = getDigit(input[i], place);
-            count[digit] += 1;
-        }
-
-        for(int i=1; i < count.length; i++){
-            count[i] += count[i-1];
-        }
-
-        for(int i = input.length-1; i >= 0; i--){
-            int digit = getDigit(input[i], place);
-
-            out[count[digit]-1] = input[i];
-            count[digit]--;
-        }
-
-        return out;
-
-    }
-
-    private static int getDigit(int value, int digitPlace){
-        return ((value/digitPlace ) % 10);
-    }
-
 }
