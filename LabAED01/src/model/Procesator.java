@@ -5,10 +5,7 @@ public class Procesator {
 	public final static double MS_PER_SECOND = 1000;
 	public final static double NS_PER_SECOND = 1000000000;
 
-	
-	private QuickSort quick;
-	private MergeSort merge;
-	private RadixSort radix;
+
 	
 	
 	
@@ -17,6 +14,32 @@ public class Procesator {
 		
 	}
 	
+	public static void quicksort(int A[], int izq, int der) {
+
+		  int pivote=A[izq];
+		  int i=izq;
+		  int j=der;
+		  int aux;
+		 
+		  while(i<j){        
+		     while(A[i]<=pivote && i<j) i++; 
+		     while(A[j]>pivote) j--;         
+		     if (i<j) {                                            
+		         aux= A[i];  
+		         A[i]=A[j];
+		         A[j]=aux;
+		     }
+		   }
+		   A[izq]=A[j];
+		   A[j]=pivote;
+		   if(izq<j-1)
+		      quicksort(A,izq,j-1);
+		   if(j+1 <der)
+		      quicksort(A,j+1,der);
+		}
+	
+	
+	
 	
 	public String takeTimeQuickSort(int A[], int izq, int der) {
 		
@@ -24,12 +47,10 @@ public class Procesator {
 		
 		//Milliseconds
 		long START_MS=System.currentTimeMillis();
-		getQuick().quicksort(A, izq, der);
 		long DURATION_MS = System.currentTimeMillis()-START_MS;
 		
 		//Nanoseconds
 		long START_NS = System.nanoTime();
-		getQuick().quicksort(A, izq, der);
 		long DURATION_NS = System.nanoTime()-START_NS;
 
 		//Seconds
@@ -48,12 +69,10 @@ public class Procesator {
 		
 		//Milliseconds
 		long START_MS=System.currentTimeMillis();
-		getMerge().merge(A, izq, m, der);
 		long DURATION_MS = System.currentTimeMillis()-START_MS;
 		
 		//Nanoseconds
 		long START_NS = System.nanoTime();
-		getMerge().merge(A, izq, m, der);
 		long DURATION_NS = System.nanoTime()-START_NS;
 
 		//Seconds
@@ -73,12 +92,10 @@ public class Procesator {
 		
 		//Milliseconds
 		long START_MS=System.currentTimeMillis();
-		getRadix().Radixsort(A);
 		long DURATION_MS = System.currentTimeMillis()-START_MS;
 		
 		//Nanoseconds
 		long START_NS = System.nanoTime();
-		getRadix().Radixsort(A);
 		long DURATION_NS = System.nanoTime()-START_NS;
 
 		//Seconds
@@ -94,36 +111,7 @@ public class Procesator {
 	
 
 
-	public QuickSort getQuick() {
-		return quick;
-	}
 
-
-	public void setQuick(QuickSort quick) {
-		this.quick = quick;
-	}
-
-
-	public MergeSort getMerge() {
-		return merge;
-	}
-
-
-	public void setMerge(MergeSort merge) {
-		this.merge = merge;
-	}
-
-
-	public RadixSort getRadix() {
-		return radix;
-	}
-
-
-	public void setRadix(RadixSort radix) {
-		this.radix = radix;
-	}
 	
 	
-	
-
 }

@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.Procesator;
+
 public class MainWindow extends JFrame {
+	
+	private Procesator pr;
 	private PanelRandomArray panelRandomArray;
 	private PanelManualArray panelManualArray;
 	
@@ -16,6 +20,7 @@ public class MainWindow extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("AED Lab 01 ");
+		pr= new Procesator();
 		panelRandomArray = new PanelRandomArray(this);
 		panelManualArray = new PanelManualArray(this);
 		this.add(BorderLayout.WEST,panelRandomArray);
