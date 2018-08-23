@@ -233,7 +233,7 @@ public class PanelRandomOptions extends JPanel implements ActionListener{
 			        }
 			}
 			else {
-				main.randomGenerate();
+				generateCall();
 			}
 			
 		}
@@ -246,6 +246,37 @@ public class PanelRandomOptions extends JPanel implements ActionListener{
 
 	public RandomArrayWindow getMain() {
 		return main;
+	}
+	
+	public void generateCall() {
+		String type=radIntegerValue.isSelected()?"int":"float";
+		String repeat=radRepeatValues.isSelected()?"repeat":"all diferents";
+		String ordenated ="";
+		if(radRandomOrder.isSelected()) {
+			ordenated="random";
+		}
+		else if(radInverseOrdenatedValues.isSelected()) {
+			ordenated = "inverse";
+		}
+		else if(radOrdenatedValues.isSelected()) {
+			ordenated = "ordenate";
+		}
+		else {
+			ordenated = "percent";
+		}
+		
+		if(ordenated.equals("percent")) {
+			main.randomGenerate(type, repeat, Integer.parseInt(jTxtQuantity.getText()), Integer.parseInt(jTxtUpperBound.getText()), Integer.parseInt(jTxtLowerBound.getText()), ordenated,Integer.parseInt(jTxtPercentOrder.getText()));
+		}
+		else {
+			main.randomGenerate(type, repeat, Integer.parseInt(jTxtQuantity.getText()), Integer.parseInt(jTxtUpperBound.getText()), Integer.parseInt(jTxtLowerBound.getText()), ordenated);
+		}
+		
+		
+		
+		
+		
+		
 	}
 
 

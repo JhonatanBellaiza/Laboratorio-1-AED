@@ -28,10 +28,20 @@ public class RandomArrayWindow extends JFrame {
 
 
 
-	public void randomGenerate() {
-		// TODO Auto-generated method stub
+	public void randomGenerate(String type, String repeat, int amount, int upperBound, int lowerBound, String order, int percent) {
+	
+		
+		
 		
 	}
+	
+	public void randomGenerate(String type, String repeat, int amount, int upperBound, int lowerBound, String order) {
+	
+		
+		
+		
+	}
+	
 	
 	
 	
