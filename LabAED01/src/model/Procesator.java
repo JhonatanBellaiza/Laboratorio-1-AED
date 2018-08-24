@@ -2,7 +2,7 @@ package model;
 
 public class Procesator {
 	
-	private double timeLastSort;
+	private String timeLastSort;
 	
 	
 	public final static double MS_PER_SECOND = 1000;
@@ -18,6 +18,7 @@ public class Procesator {
 		int max = getMax(A);
 		long START_NS;
 		long DURATION_NS;
+		String Method = "";
 		double nlgn = Math.log(A.length)*A.length;
 		int nk = A.length*max;
 		if(nlgn > nk) {
@@ -25,6 +26,7 @@ public class Procesator {
 			START_NS = System.nanoTime();
 			A = Radixsort(A, max);
 			DURATION_NS = System.nanoTime()-START_NS;
+			Method +="RadixSort";
 			
 		}
 		else {
@@ -34,14 +36,16 @@ public class Procesator {
 				START_NS = System.nanoTime();
 				quicksort(A, 0, A.length);
 				DURATION_NS = System.nanoTime()-START_NS;
+				Method +="QuickSort";
 			}
 			else {
 				START_NS = System.nanoTime();
 				mergesort(A, 0, A.length);
 				DURATION_NS = System.nanoTime()-START_NS;
+				Method +="MergeSort";
 			}
 		}
-		takeTimeSort(START_NS, DURATION_NS);
+		takeTimeSort(START_NS, DURATION_NS, Method);
 	}
 	
 	public void sortF(float A[]) {
@@ -49,17 +53,20 @@ public class Procesator {
 		long DURATION_NS;
 		double nlgnE = Math.log(A.length)*A.length;
 		double lgE = Math.log(A.length);
+		String Method = "";
 		if(nlgnE > (2*lgE)) {
 			START_NS = System.nanoTime();
 			quicksortF(A, 0, A.length);
 			DURATION_NS = System.nanoTime()-START_NS;
+			Method +="QuickSort";
 		} 
 		else {
 			START_NS = System.nanoTime();
 			mergesortF(A, 0, A.length);
 			DURATION_NS = System.nanoTime()-START_NS;
+			Method +="MergeSort";
 		}
-		takeTimeSort(START_NS, DURATION_NS);
+		takeTimeSort(START_NS, DURATION_NS, Method);
 	}
 	
 	public int getMax(int A[]) {
@@ -218,197 +225,21 @@ public class Procesator {
   		      quicksortF(A,j+1,der);
   		}
   	
-<<<<<<< HEAD
-  	public void takeTimeSort(long start, long end) {
-  		
+//<<<<<<< HEAD
+  	public void takeTimeSort(long start, long end, String Method) {
+  		String time = "";
+		
+
+		long DURATION_NS = end-start;
+
+		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
+
+		time+= "RESULT IN NANOSECONDS: "+DURATION_NS+"nanoseconds"+"\n"+
+				"RESULT IN SECONDS: "+DURATION_S2+"seconds"+"\n"+
+				"USED ALGORITHM : "+Method;
+		timeLastSort = time;
   	}
   	
-//	public String takeTimeQuickSort(int A[], int izq, int der) {
-//		
-//		String time = "";
-//		
-//		//Milliseconds
-//		long START_MS=System.currentTimeMillis();
-//		long DURATION_MS = System.currentTimeMillis()-START_MS;
-//		
-//		//Nanoseconds
-//		long START_NS = System.nanoTime();
-//		long DURATION_NS = System.nanoTime()-START_NS;
-//
-//		//Seconds
-//		
-//		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-//		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-//
-//		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-//				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-//		return time;
-//	}
-//	
-//	public String takeTimeMergeSort(int A[], int izq,int m, int der) {
-//		
-//		String time = "";
-//		
-//		//Milliseconds
-//		long START_MS=System.currentTimeMillis();
-//		long DURATION_MS = System.currentTimeMillis()-START_MS;
-//		
-//		//Nanoseconds
-//		long START_NS = System.nanoTime();
-//		long DURATION_NS = System.nanoTime()-START_NS;
-//
-//		//Seconds
-//		
-//		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-//		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-//
-//		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-//				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-//		return time;
-//	}
-//	
-//	public String takeTimeRadixSort(int A[], int max) {
-//		
-//		String time = "";
-//		
-//		//Milliseconds
-//		long START_MS=System.currentTimeMillis();
-//		long DURATION_MS = System.currentTimeMillis()-START_MS;
-//		
-//		//Nanoseconds
-//		long START_NS = System.nanoTime();
-//		
-//		long DURATION_NS = System.nanoTime()-START_NS;
-//
-//		//Seconds
-//		
-//		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-//		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-//
-//		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-//				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-//		return time;
-//	}
-//	
-=======
-	public String takeTimeQuickSort(int A[], int izq, int der) {
-		
-		String time = "";
-		
-		//Milliseconds
-		long START_MS=System.currentTimeMillis();
-		quicksort(A, izq, der);
-		long DURATION_MS = System.currentTimeMillis()-START_MS;
-		
-		//Nanoseconds
-		long START_NS = System.nanoTime();
-		quicksort(A, izq, der);
-		long DURATION_NS = System.nanoTime()-START_NS;
-
-		//Seconds
-		
-		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-
-		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-		return time;
-	}
-	
-	public String takeTimeQuickSortF(float A[], int izq, int der) {
-		
-		String time = "";
-		
-		//Milliseconds
-		long START_MS=System.currentTimeMillis();
-		quicksortF(A, izq, der);
-		long DURATION_MS = System.currentTimeMillis()-START_MS;
-		
-		//Nanoseconds
-		long START_NS = System.nanoTime();
-		quicksortF(A, izq, der);
-		long DURATION_NS = System.nanoTime()-START_NS;
-
-		//Seconds
-		
-		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-
-		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-		return time;
-	}
-	
-	public String takeTimeMergeSort(int A[], int izq,int m, int der) {
-		
-		String time = "";
-		
-		//Milliseconds
-		long START_MS=System.currentTimeMillis();
-		long DURATION_MS = System.currentTimeMillis()-START_MS;
-		
-		//Nanoseconds
-		long START_NS = System.nanoTime();
-		long DURATION_NS = System.nanoTime()-START_NS;
-
-		//Seconds
-		
-		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-
-		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-		return time;
-	}
-
-	public String takeTimeMergeSortF(float A[], int izq,int m, int der) {
-		
-		String time = "";
-		
-		//Milliseconds
-		long START_MS=System.currentTimeMillis();
-		mergeF(A, izq, m, der);
-		long DURATION_MS = System.currentTimeMillis()-START_MS;
-		
-		//Nanoseconds
-		long START_NS = System.nanoTime();
-		mergeF(A, izq, m, der);
-		long DURATION_NS = System.nanoTime()-START_NS;
-
-		//Seconds
-		
-		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-
-		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-		return time;
-	}
-	public String takeTimeRadixSort(int A[]) {
-		
-		String time = "";
-		
-		//Milliseconds
-		long START_MS=System.currentTimeMillis();
-		long DURATION_MS = System.currentTimeMillis()-START_MS;
-		
-		//Nanoseconds
-		long START_NS = System.nanoTime();
-		long DURATION_NS = System.nanoTime()-START_NS;
-
-		//Seconds
-		
-		double DURATION_S1= DURATION_MS/MS_PER_SECOND;
-		double DURATION_S2= DURATION_NS/NS_PER_SECOND;
-
-		time+= "RESULT IN NANOSECONDS: "+DURATION_MS+"nanoseconds"+"\n"+
-				"RESULT IN SECONDS: "+DURATION_S2+"seconds";
-		return time;
-	}
-	
->>>>>>> branch 'master' of https://github.com/JhonatanBellaiza/Laboratorio-1-AED
-	
-
 
 
 	
