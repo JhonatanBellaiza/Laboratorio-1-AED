@@ -11,7 +11,7 @@ class ProcesatorTest{
 	
 	private Procesator ps;
 	private int A[];
-	private float Af[];
+	private float[] Af;
 
 	public void stage1() {
 		
@@ -40,18 +40,45 @@ class ProcesatorTest{
 		
 		ps = new Procesator();
 		
-		final int SIZE = 100;
-		
-        Random r = new Random();
-        A = new int[SIZE];
+		Af = new float[8];
 
-        for (int i = 0; i < SIZE; i++){
-            A[i] = r.nextInt(Integer.MAX_VALUE);
-        }
-
+		float[] b = {1.8f, 1.6f, 29.6f, 56.2f,89.3f,1.2f, 1.1f,23.5f};
+        Af = b;
+        
 	}
 	
+	@Test
+	public void QuickSortTestF() {
+		
+		stage3();
+		ps.quicksortF(Af, 0, Af.length-1);
+		
+		int sort = 0;
+		for(int i=1 ; i<Af.length; i++) {
+			if(sort==0 && Af[i-1]>Af[i]) {
+				sort++;
+			}
+		}
+		
+		assertEquals(0, sort);
+	}
 	
+	@Test
+	public void MergeSortTestF() {
+		
+		stage3();
+		ps.mergesortF(Af, 0, Af.length-1);
+		
+		int sort = 0;
+		for(int i=1 ; i<Af.length; i++) {
+			if(sort==0 && Af[i-1]>Af[i]) {
+				sort++;
+			}
+		}
+		
+		assertEquals(0, sort);
+	}
+		
 	@Test
 	public void QuickSortTest() {
 		
