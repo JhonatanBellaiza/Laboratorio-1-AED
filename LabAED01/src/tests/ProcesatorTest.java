@@ -1,51 +1,111 @@
 package tests;
 
-import static org.junit.Assert.assertArrayEquals;
-
+import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.Random;
-
-import org.junit.Test;
-
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 import model.Procesator;
 
-public class ProcesatorTest extends TestCase{
+class ProcesatorTest{
 	
 	private Procesator ps;
-	
+	private int A[];
+	private float Af[];
+
 	public void stage1() {
 		
 		ps = new Procesator();
 		
-		final int SIZE = 10;
-
+		final int SIZE = 100;
+		
         Random r = new Random();
-        int[] test = new int[SIZE];
+        A = new int[SIZE];
 
         for (int i = 0; i < SIZE; i++){
-            test[i] = r.nextInt(100);
+            A[i] = r.nextInt(Integer.MAX_VALUE);
         }
+
 	}
+
+	public void stage2() {
+		
+		ps = new Procesator();
+		int[] b = {10,5,3,8,9,45,6,8,47,25,3,6,78,1,1000};
+		A = b;
+
+	}
+	
+	public void stage3() {
+		
+		ps = new Procesator();
+		
+		final int SIZE = 100;
+		
+        Random r = new Random();
+        A = new int[SIZE];
+
+        for (int i = 0; i < SIZE; i++){
+            A[i] = r.nextInt(Integer.MAX_VALUE);
+        }
+
+	}
+	
 	
 	@Test
 	public void QuickSortTest() {
 		
 		stage1();
+		ps.quicksort(A, 0, A.length-1);
 		
+		int sort = 0;
+		for(int i=1 ; i<A.length; i++) {
+			if(sort==0 && A[i-1]>A[i]) {
+				sort++;
+			}
+		}
+		
+		assertEquals(0, sort);
 	}
 	
 	@Test
 	public void MergeSortTest() {
 		
 		stage1();
+		ps.mergesort(A, 0, A.length-1);
 		
+		int sort = 0;
+		for(int i=1 ; i<A.length; i++) {
+			if(sort==0 && A[i-1]>A[i]) {
+				sort++;
+			}
+		}
+		
+		assertEquals(0, sort);
 	}
 	
 	@Test
 	public void RaixSortTest() {
 		
 		stage1();
+		A = ps.Radixsort(A, ps.getMax(A));
 		
+		int sort = 0;
+		for(int i=1 ; i<A.length; i++) {
+			if(sort==0 && A[i-1]>A[i]) {
+				sort++;
+			}
+		}
+		
+		assertEquals(0, sort);
+	}
+	
+	@Test
+	public void getMaxTest() {
+		
+		stage2();
+		int max = ps.getMax(A);
+		assertEquals(1000, max);
 	}
 	
 
