@@ -22,7 +22,7 @@ public class RandomArrayWindow extends JFrame {
 		panelRandomOptions= new PanelRandomOptions(this);
 		this.add(panelRandomOptions,BorderLayout.CENTER);
 		
-		
+			
 		
 	}
 
@@ -32,7 +32,7 @@ public class RandomArrayWindow extends JFrame {
 	
 		
 		
-		
+		main.randomGenerate(type, repeat, Integer.parseInt(jTxtQuantity.getText()), Integer.parseInt(jTxtUpperBound.getText()), Integer.parseInt(jTxtLowerBound.getText()), ordenated,Integer.parseInt(jTxtPercentOrder.getText()));
 	}
 	
 	public void randomGenerate(String type, String repeat, int amount, int upperBound, int lowerBound, String order) {
