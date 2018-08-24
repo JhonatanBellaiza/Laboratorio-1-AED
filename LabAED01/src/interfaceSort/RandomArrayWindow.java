@@ -30,8 +30,6 @@ public class RandomArrayWindow extends JFrame {
 
 	public void randomGenerate(String type, String repeat, int amount, int upperBound, int lowerBound, String order, int percent) {
 	
-		
-		
 		main.randomGenerate(type, repeat, Integer.parseInt(jTxtQuantity.getText()), Integer.parseInt(jTxtUpperBound.getText()), Integer.parseInt(jTxtLowerBound.getText()), ordenated,Integer.parseInt(jTxtPercentOrder.getText()));
 	}
 	
